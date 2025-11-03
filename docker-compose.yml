@@ -16,6 +16,11 @@ services:
       - posta-db
     environment:
       - NODE_ENV=development
+      - DB_HOST=posta-db
+      - DB_PORT=3306
+      - DB_USER=posta-db-username
+      - DB_PASSWORD=posta-db-password
+      - DB_NAME=posta-db
 
   posta-db:
     image: mysql:8.4
@@ -29,4 +34,5 @@ services:
       MYSQL_PASSWORD: posta-db-password
       MYSQL_ROOT_PASSWORD: posta-db-password
     volumes:
-      - ./.docker/mysql/data:/var/lib/mysql
+      - ../.docker/mysql/data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
